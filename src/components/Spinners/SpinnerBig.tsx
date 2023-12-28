@@ -1,7 +1,11 @@
+import '../../style.css';
+
 const SpinnerBig = () => {
   return (
-    <div className="spinner-border" style={{width: "4rem", height: "4rem"}} role="status">
-      <span className="visually-hidden">Loading...</span>
+    <div className="spinner-big">
+      <div className="spinner-border text-primary" style={{width: "6rem", height: "6rem"}} role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
     </div>
   );
 };

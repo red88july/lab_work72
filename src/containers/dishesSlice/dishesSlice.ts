@@ -1,96 +1,35 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {deleteContact, getContacts, getFullContacts, postContact} from '../contactsThinks/contactsThinks.ts';
-import {Contacts} from '../../types';
+import {Dishes} from '../../types';
+import {postDish} from './dishesThunks.ts';
+import {RootState} from '../../app/store.ts';
 
 interface ContactsState {
-  item: Contacts[];
-  itemFull: Contacts[];
-  postLoading: boolean;
-  getLoading: boolean;
-  getFullLoading:boolean;
-  deleteOneContact: boolean,
-  actionModal: boolean;
-  selected: string | null,
+  dish: Dishes[];
+  postDish: boolean,
 }
 
 const initialState: ContactsState = {
-  item: [],
-  itemFull: [],
-  postLoading: false,
-  getLoading: false,
-  getFullLoading:false,
-  deleteOneContact: false,
-  actionModal: false,
-  selected: null,
+  dish: [],
+  postDish: false,
 };
 
-export const contactsSlice = createSlice({
-  name: 'contact',
+export const dishesSlice = createSlice({
+  name: 'dishes',
   initialState,
-  reducers: {
-    startEventForModal: (state) => {
-      state.actionModal = true;
-    },
-    endEventForModal: (state) => {
-      state.actionModal = false;
-    },
-    contactsId: (state, action) => {
-      state.selected = action.payload;
-    }
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
-    builder.addCase(postContact.pending, (state) => {
-      state.postLoading = true;
+    builder.addCase(postDish.pending, (state) => {
+      state.postDish = true;
     });
-    builder.addCase(postContact.fulfilled, (state) => {
-      state.postLoading = false;
+    builder.addCase(postDish.fulfilled, (state) => {
+      state.postDish = false;
     });
-    builder.addCase(postContact.rejected, (state) => {
-      state.postLoading = false;
+    builder.addCase(postDish.rejected, (state) => {
+      state.postDish = false;
     });
-
-
-    builder.addCase(getContacts.pending, (state) => {
-      state.getLoading = true;
-    });
-    builder.addCase(getContacts.fulfilled, (state, {payload: item}) => {
-      state.getLoading = false;
-      state.item = item;
-    });
-    builder.addCase(getContacts.rejected, (state) => {
-      state.getLoading = false;
-    });
-
-
-    builder.addCase(getFullContacts.pending, (state) => {
-      state.getFullLoading = true;
-    });
-    builder.addCase(getFullContacts.fulfilled, (state, {payload: itemFull}) => {
-      state.getFullLoading = false;
-      state.itemFull = itemFull;
-    });
-    builder.addCase(getFullContacts.rejected, (state) => {
-      state.getFullLoading = false;
-    });
-
-
-    builder.addCase(deleteContact.pending, (state) => {
-      state.deleteOneContact = true;
-    });
-    builder.addCase(deleteContact.fulfilled, (state) => {
-      state.deleteOneContact = false;
-    });
-    builder.addCase(deleteContact.rejected, (state) => {
-      state.deleteOneContact = false;
-    });
-
   }
 });
 
-export const contactReducers = contactsSlice.reducer;
-export const {
-  startEventForModal,
-  endEventForModal,
-  contactsId
-} = contactsSlice.actions;
+export const dishReducers = dishesSlice.reducer;
+export const postOneDish = (state:RootState) => state.dishes.postDish;

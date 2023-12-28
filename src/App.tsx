@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Layout from './components/Layout/Layout';
+import {Route, Routes} from 'react-router-dom';
+import PageNoFoundPicture from '../src/images/404PageNotFound.jpg';
+import DishForm from './components/DishForm/DishForm';
+import Dishes from './components/Dishes/Dishes';
+import Orders from './components/Orders/Orders';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Layout>
+      <Routes>
+        <Route path={'/admin'} element={<Dishes/>}/>
+        <Route path={'/admin/dishes'} element={<Dishes />}/>
+        <Route path={'/admin/orders'} element={<Orders/>}/>
+        <Route path={'/new-dish'} element={<DishForm/>}/>
+        <Route path="*" element={(
+          <div className="container-fluid pic-container d-flex justify-content-center">
+            <img
+              className="pic-notfound"
+              src={PageNoFoundPicture}
+              alt="Page Not Found" />
+          </div>
+        )}/>
+      </Routes>
+    </Layout>
+  );
 }
 
-export default App
+export default App;

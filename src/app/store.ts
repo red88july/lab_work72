@@ -1,8 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {contactReducers} from '../containers/contactsSlice/contactsSlice.ts';
+import {dishReducers} from '../containers/dishesSlice/dishesSlice.ts';
 
 export const store = configureStore({
-  reducer: contactReducers
+  reducer: {
+    dishes: dishReducers
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;

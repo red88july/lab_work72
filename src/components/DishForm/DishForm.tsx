@@ -2,14 +2,18 @@ import * as React from 'react';
 import {useState} from 'react';
 import {Dishes} from '../../types';
 import DefaultPicture from '../../images/def-pic.jpg';
-import {useNavigate} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../app/hooks.ts';
+import {postDish} from '../../containers/dishesSlice/dishesThunks.ts';
+import {postOneDish} from '../../containers/dishesSlice/dishesSlice.ts';
+import ButtonSpinner from '../Spinners/ButtonSpinner';
+import SpinnerBig from '../Spinners/SpinnerBig';
 
-const ContactForm = () => {
-  const navigate = useNavigate();
-
+const DishForm = () => {
+  const dispatch = useAppDispatch();
+  const sendOneDishTwoServer = useAppSelector(postOneDish);
   const [dish, setDish] = useState<Dishes>({
     title: '',
-    price: 0,
+    price: '',
     photo: '',
   });
 
@@ -31,75 +35,72 @@ const ContactForm = () => {
 
   const onFormSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setDish((prevState) => ({
-      ...prevState,
-      title: '',
-      price: 0,
-      photo: '',
-    }));
-    // try {
-    //   await dispatch(postContact(contacts));
-    // } catch (e) {
-    //   console.log(`Fethching data with error : ${e}`);
-    // } finally {
-    //
-    // }
-  };
-
-  const handleClickBack = () => {
-    navigate('/admin');
+    try {
+      await(dispatch(postDish(dish)));
+    } finally {
+      setDish((prevState) => ({
+        ...prevState,
+        title: '',
+        price: '',
+        photo: '',
+      }));
+    }
   };
 
   return (
-    <div className="d-flex justify-content-center">
-      <form onSubmit={onFormSubmit} className="w-50 mt-5">
-        <div className="mb-3 d-flex align-items-center gap-4">
-          <span className="fw-bold">Title</span>
-          <input
-            type="text"
-            name="title"
-            value={dish.title}
-            onChange={inputSet}
-            className="form-control w-50"
-            required/>
-        </div>
-        <div className="mb-3 d-flex align-items-center gap-4 ">
-          <span className="fw-bold">Price</span>
-          <input
-            type="text"
-            name="price"
-            value={dish.price}
-            onChange={inputSet}
-            className="form-control w-50"
-            required/>
-        </div>
-        <div className="mb-3 d-flex align-items-center gap-4">
-          <span className="fw-bold">Photo</span>
-          <input
-            type="text"
-            name="photo"
-            value={dish.photo}
-            onChange={inputSet}
-            className="form-control w-50"/>
-        </div>
-        <div className="mb-3 d-flex align-items-center gap-4">
-          <span className="fw-bold">Dish preview</span>
-          <div className="pic-preview border border-3 p-2">
-            {photoPreview ()}
+    <>
+
+      <div className="d-flex justify-content-center">
+        {sendOneDishTwoServer ? <SpinnerBig/> : <form onSubmit={onFormSubmit} className="w-50 mt-5">
+          <div className="mb-3 d-flex align-items-center gap-4">
+            <span className="fw-bold">Title</span>
+            <input
+              type="text"
+              name="title"
+              value={dish.title}
+              onChange={inputSet}
+              className="form-control w-50"
+              required
+              autoFocus/>
           </div>
-        </div>
-        <div className="d-flex gap-3">
-          <button
-            type="submit"
-            className="btn btn-success"
-            onClick={handleClickBack}
-            >
-            Add dish
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className="mb-3 d-flex align-items-center gap-4 ">
+            <span className="fw-bold">Price</span>
+            <input
+              type="text"
+              name="price"
+              value={dish.price}
+              onChange={inputSet}
+              className="form-control w-50"
+              required/>
+          </div>
+          <div className="mb-3 d-flex align-items-center gap-4">
+            <span className="fw-bold">Photo</span>
+            <input
+              type="text"
+              name="photo"
+              value={dish.photo}
+              onChange={inputSet}
+              className="form-control w-50"
+              required/>
+          </div>
+          <div className="mb-3 d-flex align-items-center gap-4">
+            <span className="fw-bold">Dish preview</span>
+            <div className="pic-preview border border-3 p-2">
+              {photoPreview ()}
+            </div>
+          </div>
+          <div className="d-flex gap-3">
+            <button
+              type="submit"
+              className="btn btn-success"
+              disabled={sendOneDishTwoServer}>
+              {sendOneDishTwoServer ? <ButtonSpinner /> : 'Add dish'}
+            </button>
+          </div>
+        </form>}
+      </div>
+    </>
   );
 };
 
-export default ContactForm;
+export default DishForm;
