@@ -1,5 +1,5 @@
-import reactLogo from '../../images/ic-react.png';
 import {Link} from 'react-router-dom';
+import reactLogo from '../../images/ic-react.png';
 import '../../style.css';
 
 const Toolbar = () => {

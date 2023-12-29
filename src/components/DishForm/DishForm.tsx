@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {useState} from 'react';
 import {DishesPost} from '../../types';
-import DefaultPicture from '../../images/def-pic.jpg';
-import {useAppDispatch, useAppSelector} from '../../app/hooks.ts';
 import {postDish} from '../../containers/dishesSlice/dishesThunks.ts';
 import {postOneDish} from '../../containers/dishesSlice/dishesSlice.ts';
+import {useAppDispatch, useAppSelector} from '../../app/hooks.ts';
 import ButtonSpinner from '../Spinners/ButtonSpinner';
 import SpinnerBig from '../Spinners/SpinnerBig';
+import DefaultPicture from '../../images/def-pic.jpg';
 
 const DishForm = () => {
   const dispatch = useAppDispatch();
@@ -33,10 +33,10 @@ const DishForm = () => {
     />
   );
 
-  const onFormSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await(dispatch(postDish(dish)));
+      await (dispatch(postDish(dish)));
     } finally {
       setDish((prevState) => ({
         ...prevState,
@@ -89,7 +89,7 @@ const DishForm = () => {
           <div className="mb-3 d-flex align-items-center gap-4">
             <span className="fw-bold">Dish preview</span>
             <div className="pic-preview border border-3 p-2">
-              {photoPreview ()}
+              {photoPreview()}
             </div>
           </div>
           <div className="d-flex gap-3">
@@ -97,7 +97,7 @@ const DishForm = () => {
               type="submit"
               className="btn btn-success"
               disabled={sendOneDishTwoServer}>
-              {sendOneDishTwoServer ? <ButtonSpinner /> : 'Add dish'}
+              {sendOneDishTwoServer ? <ButtonSpinner/> : 'Add dish'}
             </button>
           </div>
         </form>}

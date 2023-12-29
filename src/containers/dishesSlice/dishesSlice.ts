@@ -59,7 +59,6 @@ export const dishesSlice = createSlice({
     builder.addCase(deleteOneDish.rejected, (state) => {
       state.deleteOneDish = false;
     });
-
     builder.addCase(updateDishParam.pending, (state) => {
       state.updataLoadingParam = true;
     });
@@ -69,8 +68,6 @@ export const dishesSlice = createSlice({
     builder.addCase(updateDishParam.rejected, (state) => {
       state.updataLoadingParam = false;
     });
-
-
     builder.addCase(fetchOneDish.pending, (state) => {
       state.fetchOneLoading = true;
     });
@@ -88,7 +85,7 @@ export const dishReducers = dishesSlice.reducer;
 export const postOneDish = (state:RootState) => state.dishes.postDish;
 export const getAllDishes = (state:RootState) => state.dishes.dishes;
 export const getOneDish = (state:RootState) => state.dishes.dishOne;
-export const fetchLoadingOneDish= (state: RootState) => state.dishes.fetchOneLoading;
+export const fetchLoadingOneDish = (state: RootState) => state.dishes.fetchOneLoading;
 export const loadingOfAllDishes = (state:RootState) => state.dishes.getAllDish;
 export const updatesDishParametrs = (state: RootState) => state.dishes.updataLoadingParam;
 export const deleteFetchingOneDish = (state:RootState) => state.dishes.deleteOneDish;

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {GetDishesDetails} from '../../types';
-import ButtonSpinner from '../Spinners/ButtonSpinner.tsx';
 import {Link} from 'react-router-dom';
+import {GetDishesDetails} from '../../types';
+import ButtonSpinner from '../Spinners/ButtonSpinner';
 
 interface Props {
   dish: GetDishesDetails;
