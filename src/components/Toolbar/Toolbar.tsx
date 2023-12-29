@@ -1,5 +1,6 @@
 import reactLogo from '../../images/ic-react.png';
 import {Link} from 'react-router-dom';
+import '../../style.css';
 
 const Toolbar = () => {
   return (
@@ -14,8 +15,8 @@ const Toolbar = () => {
         </div>
       </div>
       <div className="d-flex gap-3">
-        <Link to="/admin/dishes">Dishes</Link>
-        <Link to="/admin/orders">Orders</Link>
+        <Link to="/admin/dishes" className="links">Dishes</Link>
+        <Link to="/admin/orders" className="links">Orders</Link>
       </div>
     </nav>
 );

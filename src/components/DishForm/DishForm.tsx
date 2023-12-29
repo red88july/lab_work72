@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {Dishes} from '../../types';
+import {DishesPost} from '../../types';
 import DefaultPicture from '../../images/def-pic.jpg';
 import {useAppDispatch, useAppSelector} from '../../app/hooks.ts';
 import {postDish} from '../../containers/dishesSlice/dishesThunks.ts';
@@ -11,7 +11,7 @@ import SpinnerBig from '../Spinners/SpinnerBig';
 const DishForm = () => {
   const dispatch = useAppDispatch();
   const sendOneDishTwoServer = useAppSelector(postOneDish);
-  const [dish, setDish] = useState<Dishes>({
+  const [dish, setDish] = useState<DishesPost>({
     title: '',
     price: '',
     photo: '',
@@ -55,6 +55,7 @@ const DishForm = () => {
           <div className="mb-3 d-flex align-items-center gap-4">
             <span className="fw-bold">Title</span>
             <input
+              id="title"
               type="text"
               name="title"
               value={dish.title}
@@ -66,6 +67,7 @@ const DishForm = () => {
           <div className="mb-3 d-flex align-items-center gap-4 ">
             <span className="fw-bold">Price</span>
             <input
+              id="price"
               type="text"
               name="price"
               value={dish.price}
@@ -76,6 +78,7 @@ const DishForm = () => {
           <div className="mb-3 d-flex align-items-center gap-4">
             <span className="fw-bold">Photo</span>
             <input
+              id="photo"
               type="text"
               name="photo"
               value={dish.photo}

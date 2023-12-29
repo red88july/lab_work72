@@ -1,3 +1,14 @@
 .spinner-big {
   margin-top: 150px;
 }
+
+.links {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 20px;
+  color: #000000;
+}
+
+.links:hover {
+  text-decoration: underline;
+}
