@@ -43,11 +43,11 @@ const EditDishForm = () => {
     navigate('/admin');
   };
 
-  const updateOneloadDish = useCallback(() => {
-      if (getOneDishFromServer !== null) {
+  const updateOneLoadDish = useCallback(() => {
+      if (getOneDishFromServer) {
           setDish(getOneDishFromServer);
       } else {
-          throw new Error('Not found any Dish');
+        console.error('Data no available!');
       }
   }, [getOneDishFromServer]);
 
@@ -56,8 +56,8 @@ const EditDishForm = () => {
     }, [dispatch, id]);
 
     useEffect(() => {
-        updateOneloadDish();
-    }, [getOneDishFromServer, updateOneloadDish]);
+        void updateOneLoadDish();
+    }, [getOneDishFromServer, updateOneLoadDish]);
 
 
   return (
