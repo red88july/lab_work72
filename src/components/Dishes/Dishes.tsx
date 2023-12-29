@@ -1,7 +1,7 @@
+import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../app/hooks.ts';
 import {deleteFetchingOneDish, getAllDishes, loadingOfAllDishes} from '../../containers/dishesSlice/dishesSlice.ts';
-import {useEffect} from 'react';
 import {deleteOneDish, getAllDish} from '../../containers/dishesSlice/dishesThunks.ts';
 import SpinnerBig from '../Spinners/SpinnerBig';
 import DishesItem from './DishesItem';

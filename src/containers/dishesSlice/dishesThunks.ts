@@ -28,13 +28,6 @@ export const getAllDish = createAsyncThunk<GetDishesDetails[]>(
   }
 );
 
-export const deleteOneDish = createAsyncThunk<void, string>(
-  'dishes/deleteDish',
-  async (id) => {
-    await axiosApi.delete(`/dishes/${id}.json`);
-  }
-);
-
 export const fetchOneDish = createAsyncThunk<ApiDishes, string>(
   'dishes/fetchOneDish',
   async (id) => {
@@ -53,5 +46,12 @@ export const updateDishParam = createAsyncThunk<void, UpdateDish>(
   'dishes/updateDish',
   async({id,dish}) => {
     await axiosApi.put(`/dishes/${id}.json`, dish);
+  }
+);
+
+export const deleteOneDish = createAsyncThunk<void, string>(
+  'dishes/deleteDish',
+  async (id) => {
+    await axiosApi.delete(`/dishes/${id}.json`);
   }
 );
